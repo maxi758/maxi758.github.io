@@ -1,0 +1,47 @@
+[
+    {
+        "id": "1",
+        "skill": "HTML",
+        "percentage": "90%"
+    },
+    {
+        "id": "2",
+        "skill": "CSS",
+        "percentage": "80%"
+    },
+    {
+        "id": "3",
+        "skill": "JavaScript",
+        "percentage": "70%"
+    },
+    {
+        "id": "4",
+        "skill": "PHP",
+        "percentage": "60%"
+    },
+    {
+        "id": "5",
+        "skill": "MySQL",
+        "percentage": "50%"
+    },
+    {
+        "id": "6",
+        "skill": "Python",
+        "percentage": "40%"
+    },
+    {
+        "id": "7",
+        "skill": "Java",
+        "percentage": "30%"
+    },
+    {
+        "id": "8",
+        "skill": "C++",
+        "percentage": "20%"
+    },
+    {
+        "id": "9",
+        "skill": "C#",
+        "percentage": "10%"
+    }
+]
