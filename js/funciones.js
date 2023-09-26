@@ -68,15 +68,37 @@ fetch("https://randomuser.me/api/")
     email.innerHTML = emailFromArray(data.results);
     phone.innerHTML = phoneFromArray(data.results);
     address.innerHTML = addressFromArray(data.results);
-    const country = countryFromArray(data.results);
+    country = countryFromArray(data.results);
     const encodedCountry = encodeURIComponent(country);
     console.log(country);
     console.log(
-      `http://universities.hipolabs.com/search?name=${encodedCountry}`
+      `https://universities.hipolabs.com/search?name=${encodedCountry}`
     );
+    const jsonFileUrl2 =
+      "https://raw.githubusercontent.com/Hipo/university-domains-list/master/world_universities_and_domains.json";
+    return fetch(jsonFileUrl2);
+  })
+  .then((response) => {
+    // verifica si está todo ok (status code 200)
+    if (!response.ok) {
+      throw new Error(`Error (${response.status})`);
+    }
+    // Parsea a  JSON
+    return response.json();
+  })
+  .then((data) => {
+    console.log(data);
+    const filteredData = data.filter((university) => { 
+      return university.country === country;
+    });
+    university.innerHTML = randomUniversityFromArray(filteredData);
+  })
+  .catch((error) => {
+    console.error("Error:", error);
+  });
 
-    // Nested fetch for universities based on the country from the first call
-    return fetch(
+// esto no funciono en github pages por noo usar https
+/*return fetch(
       `http://universities.hipolabs.com/search?country=${encodedCountry}`,
       options
     );
@@ -91,31 +113,38 @@ fetch("https://randomuser.me/api/")
   })
   .catch(function (error) {
     console.error("Error:", error);
-  });
+  });*/
 
 const jsonFileUrl = "skills.json";
 
 fetch(jsonFileUrl)
   .then((response) => {
-    // Check if the response is successful (status code 200)
+
     if (!response.ok) {
       throw new Error(`Failed to fetch the JSON file (${response.status})`);
     }
-    // Parse the response as JSON
+
     return response.json();
   })
   .then((data) => {
-    // The 'data' variable now contains the parsed JSON data
+
     const skillSet = selectSkillsFromJson(data);
     const list = document.createElement("ul");
     list.classList.add("list-group");
     skills.appendChild(list);
     for (let i = 0; i < skillSet.length; i++) {
-        const skill = document.createElement("li");
-        skill.classList.add(`skill${i}`,"text-center","list-group-item","mt-3","bg-dark","text-white")
-        skill.innerHTML = skillSet[i];
-        list.appendChild(skill);
-        console.log(skillSet[i]);
+      const skill = document.createElement("li");
+      skill.classList.add(
+        `skill${i}`,
+        "text-center",
+        "list-group-item",
+        "mt-3",
+        "bg-dark",
+        "text-white"
+      );
+      skill.innerHTML = skillSet[i];
+      list.appendChild(skill);
+      console.log(skillSet[i]);
     }
     console.log(data);
   })
