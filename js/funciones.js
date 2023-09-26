@@ -70,10 +70,6 @@ fetch("https://randomuser.me/api/")
     address.innerHTML = addressFromArray(data.results);
     country = countryFromArray(data.results);
     const encodedCountry = encodeURIComponent(country);
-    console.log(country);
-    console.log(
-      `https://universities.hipolabs.com/search?name=${encodedCountry}`
-    );
     const jsonFileUrl2 =
       "https://raw.githubusercontent.com/Hipo/university-domains-list/master/world_universities_and_domains.json";
     return fetch(jsonFileUrl2);
